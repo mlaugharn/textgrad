@@ -32,7 +32,7 @@ def get_engine(engine_name: str, **kwargs) -> EngineLM:
         return ChatCohere(model_string=engine_name, **kwargs)
     elif 'vllm' in engine_name:
         from .vllm import ChatVLLM
-        model_name_or_path = kwargs.pop('model_name_or_path')
+        model_name_or_path = engine_name.replace('vllm-', '')
         return ChatVLLM(model_name_or_path, **kwargs)
     else:
         raise ValueError(f"Engine {engine_name} not supported")
