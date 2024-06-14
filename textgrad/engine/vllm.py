@@ -1,5 +1,6 @@
 from .openai import ChatOpenAI
 from .base import EngineLM, CachedEngine
+import platformdirs
 
 class ChatVLLM(ChatOpenAI):
     DEFAULT_SYSTEM_PROMPT = "You are a helpful, creative, and smart assistant."
