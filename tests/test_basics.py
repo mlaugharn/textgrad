@@ -76,6 +76,20 @@ def test_simple_forward_pass_engine():
 
     assert response
 
+def test_simple_forward_pass_engine_vllm():
+    from textgrad import BlackboxLLM
+    from textgrad.engine import get_engine
+    from textgrad import Variable
+
+    text = Variable("Hello", role_description="A variable")
+    eng = get_engine('vllm-microsoft/phi-3-mini-128k-instruct')
+
+    engine = BlackboxLLM(engine=eng)
+
+    response = engine(text)
+
+    assert response
+
 def test_variable_creation():
     from textgrad import Variable
 
