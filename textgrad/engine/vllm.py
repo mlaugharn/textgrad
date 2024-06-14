@@ -1,4 +1,4 @@
-from vllm import LLM, SamplingParams
+from .openai import ChatOpenAI
 from .base import EngineLM, CachedEngine
 
 class ChatVLLM(ChatOpenAI):
