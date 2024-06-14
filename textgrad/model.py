@@ -8,7 +8,7 @@ from textgrad.autograd.llm_ops import FormattedLLMCall
 from .config import SingletonBackwardEngine
 
 class BlackboxLLM(Module):
-    def __init__(self, engine: Union[EngineLM, str] = None, system_prompt: Union[Variable, str] = None):
+    def __init__(self, engine: Union[EngineLM, str] = None, system_prompt: Union[Variable, str] = None, **kwargs):
         """
         Initialize the LLM module.
 
@@ -22,7 +22,7 @@ class BlackboxLLM(Module):
         elif engine is None:
             engine = SingletonBackwardEngine().get_engine()
         if isinstance(engine, str):
-            engine = get_engine(engine)
+            engine = get_engine(engine, **kwargs)
         self.engine = engine
         if isinstance(system_prompt, str):
             system_prompt = Variable(system_prompt, requires_grad=False, role_description="system prompt for the language model")
