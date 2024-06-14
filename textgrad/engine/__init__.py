@@ -30,5 +30,9 @@ def get_engine(engine_name: str, **kwargs) -> EngineLM:
     elif engine_name in ["command-r-plus", "command-r", "command", "command-light"]:
         from .cohere import ChatCohere
         return ChatCohere(model_string=engine_name, **kwargs)
+    elif 'vllm' in engine_name:
+        from .vllm import ChatVLLM
+        model_name_or_path = kwargs.pop('model_name_or_path')
+        return ChatVLLM(model_name_or_path, **kwargs)
     else:
         raise ValueError(f"Engine {engine_name} not supported")
